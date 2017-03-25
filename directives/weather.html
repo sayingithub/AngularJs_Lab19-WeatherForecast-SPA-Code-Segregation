@@ -1,0 +1,132 @@
+<div class="panel panel-default">
+
+    <div class="panel-heading">
+        <!--
+        <h3 class="panel-title">{{ convertToDate(wresult.dt) | date: 'MMM d, y' }}</h3>
+        -->
+
+        <!-- Using Custom Directive -->
+        <!--
+        Below are the attributes used in the custom directive as
+        -> convert-to-standard-date="convertToDate(dt)", convertToDate javascriot function mapped as convert-to-standard-date in the custom attribute. The "dt" parameter needs to be mapped to the value using "dt :"
+        -> weather-day="wresult", wresult is mapped as weather-day, so using weatherDay.dt to the date from the weather object
+        -> date-format="MMM d, y"
+        -> convert-to-standard-faren="convertToFarenheit(dayTimeTemp)", so "dayTimeTemp" need to be mapped as "dayTimeTemp: xxxx"
+
+       NOTE: MAKE SURE THE ATTRIBUTES NAME IN CAMELCASE IS USED FOR REFERRING THE FUNCTIOIN, OBJECT, STRING
+       EX: IN THE BELOW, convertToDate is actual javascript function, but we mapped this function as convert-to-standard-date in the custom directive attribute. So you need to use the attribute name in camelcase
+        -->
+
+        <h3 class="panel-title">{{ convertToStandardDate({dt: weatherDay.dt}) | date: dateFormat }}</h3>
+    </div>
+
+    <div class="panel-body">
+        <!--
+        Daytime Temperature: {{ convertToFahrenheit(wresult.main.temp) }}
+        -->
+
+        <!-- Using Custom Directive -->
+
+        Daytime Temperature:
+
+        Kelvin: {{ convertToStandardFaren({dayTimeTemp: weatherDay.main.temp}) }}
+        Farhenheit: {{ weatherDay.main.temp }}
+    </div>
+
+</div>
+
+<!--
+API Url: http://api.openweathermap.org/data/2.5/forecast?q=London&cnt=2&appid=9859a5d6386b7d482747ff0fea2059d7
+
+API JSON Response: (View it in JSon Viewert in Notepad++ Plugin)
+{"city":{"id":2643743,"name":"London","coord":{"lon":-0.12574,"lat":51.50853},"country":"GB","population":0,"sys":{"population":0}},"cod":"200","message":0.0221,"cnt":2,"list":[{"dt":1483725600,"main":{"temp":276.51,"temp_min":276.51,"temp_max":276.692,"pressure":1040.59,"sea_level":1048.58,"grnd_level":1040.59,"humidity":84,"temp_kf":-0.19},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10n"}],"clouds":{"all":88},"wind":{"speed":3.77,"deg":218.501},"rain":{"3h":0.125},"sys":{"pod":"n"},"dt_txt":"2017-01-06 18:00:00"},{"dt":1483736400,"main":{"temp":276.84,"temp_min":276.84,"temp_max":276.976,"pressure":1039.46,"sea_level":1047.39,"grnd_level":1039.46,"humidity":95,"temp_kf":-0.14},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10n"}],"clouds":{"all":92},"wind":{"speed":4.21,"deg":217.503},"rain":{"3h":0.8},"sys":{"pod":"n"},"dt_txt":"2017-01-06 21:00:00"}]}
+
+JSON RESPONSE IN TREE VIEW
+{
+"city": {
+"id": 2643743,
+"name": "London",
+"coord": {
+    "lon": -0.12574,
+    "lat": 51.50853
+},
+"country": "GB",
+"population": 0,
+"sys": {
+    "population": 0
+}
+},
+"cod": "200",
+"message": 0.0221,
+"cnt": 2,
+"list": [{
+    "dt": 1483725600,
+    "main": {
+        "temp": 276.51,
+        "temp_min": 276.51,
+        "temp_max": 276.692,
+        "pressure": 1040.59,
+        "sea_level": 1048.58,
+        "grnd_level": 1040.59,
+        "humidity": 84,
+        "temp_kf": -0.19
+    },
+    "weather": [{
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        }
+    ],
+    "clouds": {
+        "all": 88
+    },
+    "wind": {
+        "speed": 3.77,
+        "deg": 218.501
+    },
+    "rain": {
+        "3h": 0.125
+    },
+    "sys": {
+        "pod": "n"
+    },
+    "dt_txt": "2017-01-06 18:00:00"
+}, {
+    "dt": 1483736400,
+    "main": {
+        "temp": 276.84,
+        "temp_min": 276.84,
+        "temp_max": 276.976,
+        "pressure": 1039.46,
+        "sea_level": 1047.39,
+        "grnd_level": 1039.46,
+        "humidity": 95,
+        "temp_kf": -0.14
+    },
+    "weather": [{
+            "id": 500,
+            "main": "Rain",
+            "description": "light rain",
+            "icon": "10n"
+        }
+    ],
+    "clouds": {
+        "all": 92
+    },
+    "wind": {
+        "speed": 4.21,
+        "deg": 217.503
+    },
+    "rain": {
+        "3h": 0.8
+    },
+    "sys": {
+        "pod": "n"
+    },
+    "dt_txt": "2017-01-06 21:00:00"
+}
+]
+}
+
+-->
